@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Sally Resume React</title>
+</head>
+<body>
+    <div id="app"></div>
+
+    <script
+        src="https://unpkg.com/react@16/umd/react.development.js">
+    </script>
+    <script
+        src="https://unpkg.com/react-dom@16/umd/react-dom.development.js">
+    </script>
+    <script
+        src="https://unpkg.com/babel-standalone@6/babel.min.js">
+    </script>
+    <script type="text/babel">
+        function ResumeHeader(props) {
+            return (
+                <header>
+                    <h1>{props.name} Resume</h1>
+                </header>
+            );
+        }
+        function Address(props) {
+            return (
+                <div>
+                    <img src={props.src} />
+                    <h2>Contact Me</h2>
+                    <address>
+                        <p>Address: {props.address} </p>
+                        <p>Phone: {props.phone} </p>
+                        <p>Email: {props.email} </p>
+                    </address>
+                </div>
+            );
+        }
+        function ContactInfo() {
+            return (
+                <section className="contact-me">
+                    <Address src="https://ia.media-imdb.com/images/M/MV5BMTY5NzE3NzU3MF5BMl5BanBnXkFtZTgwMjg0NTQ5MDE@._V1_UX214_CR0,0,214,317_AL_.jpg"
+                    address="123 Broad Street, New York, NY"
+                    phone="212-555-2354"
+                    email="sallystudent@gmail.com"
+                    />
+                </section>
+            );
+        }
+        function JobTech(props) {       // one job in JobList
+            const jobDetails = [
+                {detail1: 'Assisted Lead Engineer with systems diagnostics.' },
+                {detail2: 'Ran tests as directed, logging each test result into proprietary database.' },
+                {detail3: 'Facilitated work on UI development for testing software' }
+            ];
+            return (
+                <li>
+                    <h3 className="job">{props.company}</h3>
+                    <h4 className="job-title">{props.job}</h4>
+                    <ul>
+                        <li>{jobDetails[0].detail1}</li>
+                        <li>{jobDetails[1].detail2}</li>
+                        <li>{jobDetails[2].detail3}</li>
+                    </ul>
+                </li>
+            );
+        }
+        function JobDesign(props) {
+            const jobDetails = [
+                {detail1: 'Responsible for concept designs of product websites, brochures, and ad banners.' },
+                {detail2: 'Updated social media websites and provided surveys for design feedback.' },
+            ];
+            return (
+                <li>
+                    <h3 className="job">{props.company}</h3>
+                    <h4 className="job-title">{props.job}</h4>
+                    <ul>
+                        <li>{jobDetails[0].detail1}</li>
+                        <li>{jobDetails[1].detail2}</li>
+                    </ul>
+                </li>
+            );
+        }
+        function JobsList() {
+            return (
+                <section className="employment-history">
+                    <h2>Employment History</h2>
+                    <ul>
+                        <JobTech company="BadaBing"
+                        job="Software Tech" />
+                        <JobDesign company="Hello World!"
+                        job="Graphic Designer" />
+                    </ul>
+                </section>
+            );
+        }
+        function Education(props) {
+            return (
+                <li>
+                    <h3 className="school">{props.school}</h3>
+                    <p>{props.dates}</p>
+                    <p>{props.degree}</p>
+                </li>
+            );
+        }
+        function EducationList() {
+            return (
+                <section className="education">
+                    <h2>Education</h2>
+                    <ul>
+                        <Education school="New York University"
+                         dates="May 2011-July 2015"
+                         degree="Bachelors of Science in Engineering" />
+                        <Education school="Hunter College"
+                         dates="September 2007-January 2011"
+                         degree="Associates in Graphic Design" />
+                    </ul>
+                </section>
+            );
+        }
+        function App(props) {
+            console.log(props);
+            const studentName = "Sally Student";
+            return (
+                <div>
+                    <ResumeHeader name="Sally Student" />
+                    <main role="main" className={props.className}>
+                        {props.children}
+                    </main>
+                </div>
+            );
+        }
+        ReactDOM.render(
+        // Add a className to the App
+        <App className='resume'>
+                <ContactInfo />
+                <JobsList />
+                <EducationList />
+        </App>,
+        document.querySelector('#app')
+        );
+    </script>
+</body>
+</html>
